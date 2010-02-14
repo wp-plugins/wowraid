@@ -1,0 +1,35 @@
+#icon-wowraid {
+	background: transparent url(../images/wow-icon32x32.png) no-repeat;
+}
+.column-name {
+	width:auto;
+	text-align:left;
+}
+.column-user {
+	width:150px;
+	text-align:left;
+}
+.column-level {
+	width:30px;
+	text-align:right;
+}
+.column-type {
+	width:80px;
+	text-align:center;
+}
+.column-points {
+	width:30px;
+	text-align:right;
+}
+.column-professions {
+	width:110px;
+	text-align:left;
+}
+.column-talent {
+	width:100px;
+	text-align:left;
+}
+.column-status {
+	width:90px;
+	text-align:left;
+}
