@@ -161,6 +161,7 @@
 	//Update chars from WoW Armory
 	function wowraid_update_chars() {
 		global $wpdb;
+		@set_time_limit(0); //unlimited execution time
 		$cfg=get_option('wowraid_cfg');		
 		$url = 'http://'.$cfg['wowarmoryregion'].'.wowarmory.com/guild-info.xml?r='.urlencode($cfg['realm']).'&n='.urlencode($cfg['guild']).'&p=1';  
 
@@ -183,6 +184,8 @@
 		xml_parse_into_struct($parser, $content,$vals,$index);
 		xml_parser_free($parser);	
 		
+		print_r($vals);
+		
 		if (empty($vals[$index['GUILDHEADER'][0]]['attributes']['NAME'])) 
 			return false;
 		
@@ -193,15 +196,15 @@
 					$wpdb->update( $wpdb->wowraid_chars, array( 'Twink' =>1 ), array( 'Name' => $vals[$cahrid]['attributes']['NAME'] ), array( '%s' ), array( '%s' ) );
 				if ($cfg['updateraiderrank']>0 and $cfg['updateraiderrank']>=$vals[$cahrid]['attributes']['RANK'])
 					$wpdb->update( $wpdb->wowraid_chars, array( 'Raider' =>1 ), array( 'Name' => $vals[$cahrid]['attributes']['NAME'] ), array( '%s' ), array( '%s' ) );
-				@set_time_limit(30);
 			}
+			sleep(1);  //query server not to fast
 		}
 		
 		//Update char not in guild
 		$chars = $wpdb->get_results("SELECT Name FROM $wpdb->wowraid_chars WHERE last_update < ".$timeupdatebegin." ORDER BY last_update",'ARRAY_A');
 		foreach($chars as $char) {
 			wowraid_get_char_data($char['Name']);
-			@set_time_limit(30);		
+			sleep(1);  //query server not to fast
 		}
 		
 		$twinkguilds=split(',',$cfg['twinkguild']);
