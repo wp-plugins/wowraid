@@ -4,7 +4,7 @@ Plugin Name: WoW Raid
 Plugin URI: http://danielhuesken.de/portfolio/wowraid/
 Description: World of Warcraft Raid Planer, Guild Management and Blog tools.
 Author: Daniel H&uuml;sken
-Version: 0.1.0.2
+Version: 0.1.0.§
 Author URI: http://danielhuesken.de
 Text Domain: wowraid
 Domain Path: /lang/

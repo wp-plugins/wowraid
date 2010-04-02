@@ -143,7 +143,7 @@
 	
 	//add edit setting to plugins page
 	function wowraid_plugin_options_link($links) {
-		$settings_link='<a href="admin.php?page=WoWRaid" title="' . __('Go to Settings Page','wowraid') . '" class="edit">' . __('Settings') . '</a>';
+		$settings_link='<a href="admin.php?page=WoWRaidSettings" title="' . __('Go to Settings Page','wowraid') . '" class="edit">' . __('Settings') . '</a>';
 		array_unshift( $links, $settings_link ); 
 		return $links;
 	}
@@ -427,6 +427,7 @@
 	function wowraid_the_content($the_content) {
 		global $wpdb;
 		$cfg=get_option('wowraid_cfg');
+		//Display item links
 		$pos=0;
 		while ($pos = strpos($the_content, "[item=",$pos)) {
 			if ($pos !== FALSE) {
@@ -445,6 +446,7 @@
 				}
 			}
 		}
+		//Display char links
 		$pos=0;
 		while ($pos = strpos($the_content, "[char=",$pos)) {
 			if ($pos !== FALSE) {
@@ -463,7 +465,7 @@
 				}
 			}
 		}
-		
+		//Display gild roster
 		if (strpos($the_content, "[show_guild_chars]")) {
 			$cfg=get_option('wowraid_cfg');
 			$code="";$where="";$switsh=1;
@@ -895,6 +897,8 @@
 		add_action('admin_menu', 'wowraid_menu_entry');
 		//add filter for Items and more in content
 		add_filter('the_content', 'wowraid_the_content');
+		//add filter for Items and more in Simple:Press
+		add_filter('sf_show_post_content', 'wowraid_the_content');
 		//For Tooltips on Page
 		add_action('wp_head', 'wowraid_wp_head',1);
 		//Action fpr WP Login
