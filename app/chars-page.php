@@ -104,7 +104,6 @@ $page_links = paginate_links( array(
 	'add_args' =>  array('ClassID'=> $ClassID,'order_by'=>$order_by,'s'=>$s,'guildfilter'=>$guildfilter,'charstatus'=>$charstatus)
 ));
 
-		
 ?>	
 
 <div class="wrap">

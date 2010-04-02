@@ -192,9 +192,9 @@
 		$timeupdatebegin=time();
 		foreach($index['CHARACTER'] as $cahrid) {
 			if (wowraid_get_char_data($vals[$cahrid]['attributes']['NAME'])) {
-				if (($cfg['updatetwinkrank']>0 and $cfg['updatetwinkrank']==$vals[$cahrid]['attributes']['RANK']) or ($cfg['updatetwinklevel']>$vals[$cahrid]['attributes']['LEVEL']))
+				if ((!empty($cfg['updatetwinkrank']) and in_array($vals[$cahrid]['attributes']['RANK'],$cfg['updatetwinkrank'])) or ($cfg['updatetwinklevel']>$vals[$cahrid]['attributes']['LEVEL']))
 					$wpdb->update( $wpdb->wowraid_chars, array( 'Twink' =>1 ), array( 'Name' => $vals[$cahrid]['attributes']['NAME'] ), array( '%s' ), array( '%s' ) );
-				if ($cfg['updateraiderrank']>0 and $cfg['updateraiderrank']>=$vals[$cahrid]['attributes']['RANK'])
+				if (!empty($cfg['updateraiderrank']) and in_array($vals[$cahrid]['attributes']['RANK'],$cfg['updateraiderrank']))
 					$wpdb->update( $wpdb->wowraid_chars, array( 'Raider' =>1 ), array( 'Name' => $vals[$cahrid]['attributes']['NAME'] ), array( '%s' ), array( '%s' ) );
 			}
 			sleep(1);  //query server not to fast
@@ -393,9 +393,9 @@
 		if (!isset($cfg['wowarmoryregion'])) $cfg['wowarmoryregion']="www";
 		if (!isset($cfg['wowarmorylang'])) $cfg['wowarmorylang']="en_us";
 		if (!isset($cfg['wowarmorylang'])) $cfg['itemlinktip']="wowhead_www";
-		if (!isset($cfg['updatetwinkrank'])) $cfg['updatetwinkrank']=-1;
+		if (!isset($cfg['updatetwinkrank'])) $cfg['updatetwinkrank']=array();
 		if (!isset($cfg['updatetwinklevel'])) $cfg['updatetwinklevel']=10;
-		if (!isset($cfg['updateraiderrank'])) $cfg['updateraiderrank']=-1;
+		if (!isset($cfg['updateraiderrank'])) $cfg['updateraiderrank']=array();
 		if (!isset($cfg['updateactivate'])) $cfg['updateactivate']=false;
 		if (!isset($cfg['updatehour'])) $cfg['updatehour']=01;
 		if (!isset($cfg['updateminute'])) $cfg['updateminute']=30;

@@ -114,12 +114,14 @@ $cfg=get_option('wowraid_cfg');
 
 <tr valign="top"> 
 <th scope="row"><label for="updatetwinkrank"><?PHP _e('Twinks Guild rank','wowraid'); ?></label></th> 
-<td><select name="updatetwinkrank" id="updatetwinkrank" class="postform">
-<option value="-1"<?PHP selected($cfg['updatetwinkrank'],'-1'); ?>><?PHP _e('none','wowraid'); ?></option>
-<?PHP for ($i=0; $i<=10;$i++) { ?>
-<option value="<?PHP echo $i; ?>"<?PHP selected($cfg['updatetwinkrank'],$i); ?>><?PHP _e('Rank','wowraid'); ?> <?PHP echo $i; ?></option>
-<?PHP } ?>
-</select></td></tr>
+<td>
+<input type="button" value="<?php _e('All'); ?>" onclick='jQuery("#updatetwinkrank >option").attr("selected","selected")' style="font-size:9px;"<?php echo $disabeld; ?> class="button" /> <input type="button" value="<?php _e('None'); ?>" onclick='jQuery("#updatetwinkrank > option").attr("selected","")' style="font-size:9px;"<?php echo $disabeld; ?> class="button" /><br />
+<select style="height:70px;font-size:11px;" name="updatetwinkrank[]" id="updatetwinkrank" multiple="multiple">
+<?PHP for ($i=1; $i<=10;$i++) { ?>
+	<option value="<?PHP echo $i; ?>"<?PHP selected(in_array($i,(array)$cfg['updatetwinkrank']),true); ?>><?PHP _e('Rank','wowraid'); ?> <?PHP echo $i; ?></option>
+<?PHP } ?>     
+</select>
+</td></tr>
 <tr valign="top"> 
 <th scope="row"><label for="updatetwinklevel"><?PHP _e('Twinks are Chars under Level','wowraid'); ?></label></th> 
 <td><select name="updatetwinklevel" id="updatetwinklevel" class="postform">
@@ -129,12 +131,14 @@ $cfg=get_option('wowraid_cfg');
 </select></td></tr>
 <tr valign="top"> 
 <th scope="row"><label for="updateraiderrank"><?PHP _e('Raider Guild rank','wowraid'); ?></label></th> 
-<td><select name="updateraiderrank" id="updateraiderrank" class="postform">
-<option value="-1"<?PHP selected($cfg['updateraiderrank'],'-1'); ?>><?PHP _e('none','wowraid'); ?></option>
-<?PHP for ($i=0; $i<=10;$i++) { ?>
-<option value="<?PHP echo $i; ?>"<?PHP selected($cfg['updateraiderrank'],$i); ?>><?PHP _e('Rank','wowraid'); ?> <?PHP echo $i; ?></option>
-<?PHP } ?>
-</select></td></tr>
+<td>
+<input type="button" value="<?php _e('All'); ?>" onclick='jQuery("#updateraiderrank >option").attr("selected","selected")' style="font-size:9px;"<?php echo $disabeld; ?> class="button" /> <input type="button" value="<?php _e('None'); ?>" onclick='jQuery("#updateraiderrank > option").attr("selected","")' style="font-size:9px;"<?php echo $disabeld; ?> class="button" /><br />
+<select style="height:70px;font-size:11px;" name="updateraiderrank[]" id="updateraiderrank" multiple="multiple">
+<?PHP for ($i=1; $i<=10;$i++) { ?>
+	<option value="<?PHP echo $i; ?>"<?PHP selected(in_array($i,(array)$cfg['updateraiderrank']),true); ?>><?PHP _e('Rank','wowraid'); ?> <?PHP echo $i; ?></option>
+<?PHP } ?>     
+</select>
+</td></tr>
 </table> 
 
 <h3><?PHP _e('Register for Blog','wowraid'); ?></h3> 
@@ -236,14 +240,6 @@ $cfg=get_option('wowraid_cfg');
 		</td>
 	</tr>
 	
-	<tr class="form-field">
-		<th scope="row"><label for="role"><?php _e('User'); ?></label></th>
-		<td>
-			<?php
-			wp_dropdown_users(array('selected'=>2,'name'=>'userID'));
-			?>
-		</td>
-	</tr>
 </table> 
 
 

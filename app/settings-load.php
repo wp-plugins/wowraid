@@ -20,8 +20,8 @@ if ($_POST['Submit']) {
 	$cfg['updatehour']=$_POST['updatehour'];
 	$cfg['updateminute']=$_POST['updateminute'];
 	$cfg['regpassword']=$_POST['regpassword'];
-	$cfg['guildcharsraider']=$_POST['guildcharsraider'];
-	$cfg['guildcharstwinks']=$_POST['guildcharstwinks'];
+	$cfg['guildcharsraider']=(array)$_POST['guildcharsraider'];
+	$cfg['guildcharstwinks']=(array)$_POST['guildcharstwinks'];
 	$cfg['guildcharsdetailed']=$_POST['guildcharsdetailed'];
 	$cfg['rolesettings']=$_POST['rolesettings'];
 	$cfg['rolechars']=$_POST['rolechars'];
